@@ -1,6 +1,5 @@
 <script>
-    export let data;
-
+	export let data;
 </script>
 
 <div>{JSON.stringify(data)}</div>
