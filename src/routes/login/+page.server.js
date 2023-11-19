@@ -1,11 +1,12 @@
-import { fail } from '@sveltejs/kit';
+import { fail, redirect } from '@sveltejs/kit';
 
-export const load = async ({}) => {
-	return { user: null };
+export const load = async ({ locals }) => {
+  // if user has logged in, redirect to main page
+  if (locals.user) throw redirect(307, "/");
 };
 
 export const actions = {
-	default: async ({ request, fetch }) => {
+	default: async ({ cookies, request, fetch }) => {
 		const formData = await request.formData();
 		const username = formData.get('username');
 		const password = formData.get('password');
@@ -20,6 +21,7 @@ export const actions = {
 		headers.append('Authorization', `Basic ${encodedCredentials}`);
 		headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
+    let success = false;
 		try {
 			const response = await fetch(tokenUrl, {
 				method: 'POST',
@@ -29,12 +31,18 @@ export const actions = {
 			if (!response.ok) {
 				throw new Error(`HTTP error! Status: ${response.status}`);
 			}
-
-			const token = await response.text();
-			return { status: 201, token };
-		} catch (err) {
-			console.error(err);
-			return fail(401, { err });
+      const token = await response.text();
+      cookies.set('jwt', token, { path: '/' });
+      success = true;
+    } catch (err) {
+      console.error("error while signing in", err);
+      success = false;
 		}
+
+    if (success) {
+      throw redirect(307, '/');
+    } else {
+      return fail(401);
+    }
 	},
 };
