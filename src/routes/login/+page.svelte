@@ -2,13 +2,16 @@
 	export let data;
 </script>
 
-<form method="POST">
+<form
+	method="POST"
+	action="?/login"
+>
 	<label>
 		Username
 		<input
 			name="username"
 			type="text"
-			value="user"
+			value="admin"
 		/>
 	</label>
 	<label>
@@ -16,8 +19,12 @@
 		<input
 			name="password"
 			type="password"
-			value="password"
+			value="admin"
 		/>
 	</label>
 	<button type="submit">Login</button>
+	<button
+		type="submit"
+		formaction="?/register">Register</button
+	>
 </form>

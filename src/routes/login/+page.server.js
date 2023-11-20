@@ -6,32 +6,33 @@ export const load = async ({ locals }) => {
 };
 
 export const actions = {
-	default: async ({ cookies, request, fetch }) => {
+	login: async ({ cookies, request, fetch }) => {
+		// login action
 		const formData = await request.formData();
 		const username = formData.get('username');
 		const password = formData.get('password');
 
-		const tokenUrl = 'http://localhost:8080/token';
-		// Base64 encode credentials
-		const credentials = `${username}:${password}`;
-		const encodedCredentials = btoa(credentials);
-		console.log({ username, password, encodedCredentials });
-
-		const headers = new Headers();
-		headers.append('Authorization', `Basic ${encodedCredentials}`);
-		headers.append('Content-Type', 'application/x-www-form-urlencoded');
+		const tokenUrl = 'http://localhost:8080/auth/login';
 
 		let success = false;
 		try {
 			const response = await fetch(tokenUrl, {
 				method: 'POST',
-				headers: headers,
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					username,
+					password,
+				}),
 			});
 
 			if (!response.ok) {
 				throw new Error(`HTTP error! Status: ${response.status}`);
 			}
+
 			const token = await response.text();
+			console.log({ token });
 			cookies.set('jwt', token, { path: '/' });
 			success = true;
 		} catch (err) {
@@ -44,5 +45,23 @@ export const actions = {
 		} else {
 			return fail(401);
 		}
+	},
+	register: async ({ cookies, request, fetch }) => {
+		// login action
+		const formData = await request.formData();
+		const username = formData.get('username');
+		const password = formData.get('password');
+
+		const response = await fetch('http://localhost:8080/auth/register', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				username,
+				password,
+				roles: 'ROLE_USER',
+			}),
+		});
 	},
 };
