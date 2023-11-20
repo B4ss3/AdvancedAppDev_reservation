@@ -1,8 +1,8 @@
 import { fail, redirect } from '@sveltejs/kit';
 
 export const load = async ({ locals }) => {
-  // if user has logged in, redirect to main page
-  if (locals.user) throw redirect(307, "/");
+	// if user has logged in, redirect to main page
+	if (locals.user) throw redirect(307, '/');
 };
 
 export const actions = {
@@ -21,7 +21,7 @@ export const actions = {
 		headers.append('Authorization', `Basic ${encodedCredentials}`);
 		headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
-    let success = false;
+		let success = false;
 		try {
 			const response = await fetch(tokenUrl, {
 				method: 'POST',
@@ -31,18 +31,18 @@ export const actions = {
 			if (!response.ok) {
 				throw new Error(`HTTP error! Status: ${response.status}`);
 			}
-      const token = await response.text();
-      cookies.set('jwt', token, { path: '/' });
-      success = true;
-    } catch (err) {
-      console.error("error while signing in", err);
-      success = false;
+			const token = await response.text();
+			cookies.set('jwt', token, { path: '/' });
+			success = true;
+		} catch (err) {
+			console.error('error while signing in', err);
+			success = false;
 		}
 
-    if (success) {
-      throw redirect(307, '/');
-    } else {
-      return fail(401);
-    }
+		if (success) {
+			throw redirect(307, '/');
+		} else {
+			return fail(401);
+		}
 	},
 };

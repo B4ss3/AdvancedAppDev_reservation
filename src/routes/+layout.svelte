@@ -1,7 +1,7 @@
 <script>
 	import '../app.postcss';
 
-	export let data
+	export let data;
 </script>
 
 <nav>
@@ -16,14 +16,14 @@
 </nav>
 
 {#if data.user}
-<h1>Hi, {data.user.sub}</h1>
+	<h1>Hi, {data.user.sub}</h1>
 {/if}
 
 <slot />
 
 <style>
-h1{
-	font-size: 24px;
-	font-weight: bold;
-}
+	h1 {
+		font-size: 24px;
+		font-weight: bold;
+	}
 </style>
