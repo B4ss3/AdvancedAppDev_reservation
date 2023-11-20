@@ -20,3 +20,21 @@ export async function handle({ event, resolve }) {
 		return resolve(event);
 	}
 }
+
+export async function handleFetch({ request, fetch }) {
+	// if process.env.API_ENDPOINT is defined, project is being run in docker container
+	// this means that using the normal localhost:8080 does not work
+	// therefore we change the host to the name of the backend service, saved in API_ENDPOINT
+	if (
+		request.url.startsWith('http://localhost:8080/') &&
+		process.env?.API_ENDPOINT
+	) {
+		// clone the original request, but change the URL
+		request = new Request(
+			request.url.replace('http://localhost:8080/', process.env.API_ENDPOINT),
+			request,
+		);
+	}
+
+	return fetch(request);
+}

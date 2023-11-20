@@ -1,14 +1,22 @@
 services:
   frontend:
+    networks:
+      - advappdev_reservation-net
     build: .
     user: 'node'
     environment:
       - NODE_ENV=production
       # Sets the timezone of the containers OS
       - TZ=Finland/Helsinki
+      - API_ENDPOINT=http://backend:8080/
+      - ORIGIN=http://localhost:3000
     # commented out to not make the file required until there's actually use for it
     # env_file:
     #   - .env
     restart: unless-stopped
     ports:
       - 3000:3000
+
+networks:
+  advappdev_reservation-net:
+    external: true

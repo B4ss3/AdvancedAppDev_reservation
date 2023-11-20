@@ -7,7 +7,6 @@ export const load = async ({ locals }) => {
 
 export const actions = {
 	login: async ({ cookies, request, fetch }) => {
-		// login action
 		const formData = await request.formData();
 		const username = formData.get('username');
 		const password = formData.get('password');
@@ -46,8 +45,7 @@ export const actions = {
 			return fail(401);
 		}
 	},
-	register: async ({ cookies, request, fetch }) => {
-		// login action
+	register: async ({ request, fetch }) => {
 		const formData = await request.formData();
 		const username = formData.get('username');
 		const password = formData.get('password');
