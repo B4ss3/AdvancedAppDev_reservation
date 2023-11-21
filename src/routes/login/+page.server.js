@@ -36,8 +36,8 @@ export const actions = {
 					'Content-Type': 'application/json',
 				},
 				body: JSON.stringify({
-					username:form.data.username,
-					password:form.data.password,
+					username: form.data.username,
+					password: form.data.password,
 				}),
 			});
 

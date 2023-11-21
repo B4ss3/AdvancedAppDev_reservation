@@ -31,6 +31,9 @@
 			bind:value={$form.password}
 		/>
 		<button type="submit">Login</button>
-		<a class="text-center" href="/register">Register</a>
+		<a
+			class="text-center"
+			href="/register">Register</a
+		>
 	</form>
 </article>
