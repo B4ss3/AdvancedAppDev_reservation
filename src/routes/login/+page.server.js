@@ -1,4 +1,14 @@
 import { fail, redirect } from '@sveltejs/kit';
+import { z } from 'zod'
+import { superValidate } from 'sveltekit-superforms/server';
+
+const newUserSchema = z.object({
+	firstName: z.string().min(1),
+	lastname: z.string().min(1),
+	email: z.string().min(1),
+	username: z.string().min(1),
+	password: z.string().min(1)
+})
 
 export const load = async ({ locals }) => {
 	// if user has logged in, redirect to main page
@@ -44,22 +54,5 @@ export const actions = {
 		} else {
 			return fail(401);
 		}
-	},
-	register: async ({ request, fetch }) => {
-		const formData = await request.formData();
-		const username = formData.get('username');
-		const password = formData.get('password');
-
-		const response = await fetch('http://localhost:8080/auth/register', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				username,
-				password,
-				roles: 'ROLE_USER',
-			}),
-		});
 	},
 };
