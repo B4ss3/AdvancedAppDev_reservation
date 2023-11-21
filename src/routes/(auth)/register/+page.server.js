@@ -26,24 +26,30 @@ export const actions = {
 			});
 		}
 
-		return { form };
-	},
-	/* 
-	register: async ({ request, fetch }) => {
-		const formData = await request.formData();
-		const username = formData.get('username');
-		const password = formData.get('password');
+		try {
+			const response = await fetch('http://localhost:8080/auth/register', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					firstName: form.data.firstName,
+					lastName: form.data.lastName,
+					email: form.data.email,
+					password: form.data.password,
+				}),
+			});
 
-		const response = await fetch('http://localhost:8080/auth/register', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				username,
-				password,
-				roles: 'ROLE_USER',
-			}),
-		});
-	}, */
+			if (!response.ok) {
+				throw new Error(`HTTP error! Status: ${response.status}`);
+			}
+
+			return { form };
+		} catch (err) {
+			console.error('error while registering user', err);
+			return fail(500, {
+				form,
+			});
+		}
+	},
 };

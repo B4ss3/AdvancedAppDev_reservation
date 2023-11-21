@@ -3,8 +3,7 @@ import { z } from 'zod';
 import { superValidate } from 'sveltekit-superforms/server';
 
 const loginSchema = z.object({
-	/* email: z.string().min(1), */
-	username: z.string().min(1),
+	email: z.string().min(1),
 	password: z.string().min(5),
 });
 
@@ -19,24 +18,21 @@ export const load = async ({ locals }) => {
 export const actions = {
 	default: async ({ cookies, request, fetch }) => {
 		const form = await superValidate(request, loginSchema);
-		console.log(form.data);
+
 		if (!form.valid) {
 			return fail(400, {
 				form,
 			});
 		}
 
-		const tokenUrl = 'http://localhost:8080/auth/login';
-
-		let success = false;
 		try {
-			const response = await fetch(tokenUrl, {
+			const response = await fetch('http://localhost:8080/auth/login', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
 				},
 				body: JSON.stringify({
-					username: form.data.username,
+					email: form.data.email,
 					password: form.data.password,
 				}),
 			});
@@ -46,18 +42,14 @@ export const actions = {
 			}
 
 			const token = await response.text();
-			console.log({ token });
 			cookies.set('jwt', token, { path: '/' });
-			success = true;
+
+			return { form };
 		} catch (err) {
 			console.error('error while signing in', err);
-			success = false;
-		}
-
-		if (success) {
-			throw redirect(307, '/');
-		} else {
-			return fail(401);
+			return fail(500, {
+				form,
+			});
 		}
 	},
 };
