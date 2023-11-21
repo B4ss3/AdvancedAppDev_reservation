@@ -23,8 +23,9 @@
 		/>
 	</label>
 	<button type="submit">Login</button>
-	<button
+	<a href="/register">Register</a>
+	<!-- <button
 		type="submit"
 		formaction="?/register">Register</button
-	>
+	> -->
 </form>
