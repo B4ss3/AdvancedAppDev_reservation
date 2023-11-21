@@ -1,25 +1,30 @@
 import { fail, redirect } from '@sveltejs/kit';
-import { z } from 'zod'
+import { z } from 'zod';
 import { superValidate } from 'sveltekit-superforms/server';
 
-const newUserSchema = z.object({
-	firstName: z.string().min(1),
-	lastname: z.string().min(1),
-	email: z.string().min(1),
+const loginSchema = z.object({
+	/* email: z.string().min(1), */
 	username: z.string().min(1),
-	password: z.string().min(1)
-})
+	password: z.string().min(5),
+});
 
 export const load = async ({ locals }) => {
 	// if user has logged in, redirect to main page
 	if (locals.user) throw redirect(307, '/');
+
+	const form = await superValidate(loginSchema);
+	return { form };
 };
 
 export const actions = {
-	login: async ({ cookies, request, fetch }) => {
-		const formData = await request.formData();
-		const username = formData.get('username');
-		const password = formData.get('password');
+	default: async ({ cookies, request, fetch }) => {
+		const form = await superValidate(request, loginSchema);
+		console.log(form.data);
+		if (!form.valid) {
+			return fail(400, {
+				form,
+			});
+		}
 
 		const tokenUrl = 'http://localhost:8080/auth/login';
 
@@ -31,8 +36,8 @@ export const actions = {
 					'Content-Type': 'application/json',
 				},
 				body: JSON.stringify({
-					username,
-					password,
+					username:form.data.username,
+					password:form.data.password,
 				}),
 			});
 

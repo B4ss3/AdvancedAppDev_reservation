@@ -5,16 +5,15 @@ import { superValidate } from 'sveltekit-superforms/server';
 const newUserSchema = z.object({
 	firstName: z.string().min(1),
 	lastName: z.string().min(1),
-	email: z.string().min(1),
-	userName: z.string().min(1),
-	password: z.string().min(6),
+	email: z.string().email().min(4),
+	password: z.string().min(5),
 });
 
-export const load = async ({ locals, event }) => {
+export const load = async ({ locals }) => {
 	// if user has logged in, redirect to main page
 	if (locals.user) throw redirect(307, '/');
 
-	const form = await superValidate(event, newUserSchema);
+	const form = await superValidate(newUserSchema);
 	return { form };
 };
 
@@ -29,7 +28,7 @@ export const actions = {
 
 		return { form };
 	},
-    
+	/* 
 	register: async ({ request, fetch }) => {
 		const formData = await request.formData();
 		const username = formData.get('username');
@@ -46,5 +45,5 @@ export const actions = {
 				roles: 'ROLE_USER',
 			}),
 		});
-	},
+	}, */
 };
