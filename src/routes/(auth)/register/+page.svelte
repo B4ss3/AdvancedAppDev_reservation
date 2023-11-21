@@ -1,67 +1,77 @@
 <script>
-	export let data;
+	import { goto } from '$app/navigation';
 	import { superForm } from 'sveltekit-superforms/client';
 	import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
+	export let data;
 
-	const { form, errors, constraints } = superForm(data.form);
+	const { form, constraints, enhance } = superForm(data.form, {
+		resetForm: true,
+		onResult: async ({ result }) => {
+			if (result.type === 'success') {
+				await goto('/login');
+			} else {
+				console.error(result.error);
+			}
+		},
+	});
 </script>
 
-<SuperDebug data={form} />
+<!-- <SuperDebug data={form} /> -->
 
-<article class=" max-w-md m-auto">
+<article class="max-w-md m-auto">
 	<header>
-		<h1 class="text-center">Register as new user</h1>
+		<h3 class="h3 text-center">Register a new user</h3>
 	</header>
 	<form
-		class="px-2 mb-2 border-2 flex flex-col"
+		class="px-2 mb-2 flex flex-col"
 		method="POST"
+		use:enhance
 	>
-		<label for="firstName">First name</label>
-		<input
-			type="text"
-			id="firstName"
-			name="firstName"
-			placeholder="First name"
-			bind:value={$form.firstName}
-			{...constraints.firstName}
-		/>
-		{#if $errors.firstName}
-			<small>{$errors.firstName}</small>
-		{/if}
-		<label for="lastName">Last name</label>
-		<input
-			type="text"
-			id="lastName"
-			name="lastName"
-			placeholder="Last name"
-			bind:value={$form.lastName}
-			{...constraints.lastName}
-		/>
-		{#if $errors.lastName}
-			<small>{$errors.lastName}</small>
-		{/if}
-		<label for="email">Email</label>
-		<input
-			type="email"
-			id="email"
-			name="email"
-			placeholder="email"
-			bind:value={$form.email}
-			{...constraints.email}
-		/>
-		{#if $errors.email}
-			<small>{$errors.email}</small>
-		{/if}
-		<label for="password">Password</label>
-		<input
-			type="password"
-			id="password"
-			name="password"
-			bind:value={$form.password}
-			{...constraints.password}
-		/>
+		<label class="label">
+			<span>First name</span>
+			<input
+				class="input"
+				type="text"
+				name="firstName"
+				bind:value={$form.firstName}
+				{...$constraints.firstName}
+			/>
+		</label>
+
+		<label class="label">
+			<span>Last name</span>
+			<input
+				class="input"
+				type="text"
+				name="lastName"
+				bind:value={$form.lastName}
+				{...$constraints.lastName}
+			/>
+		</label>
+
+		<label class="label">
+			<span>Email</span>
+			<input
+				class="input"
+				type="email"
+				name="email"
+				bind:value={$form.email}
+				{...$constraints.email}
+			/>
+		</label>
+
+		<label class="label">
+			<span>Password</span>
+			<input
+				class="input"
+				type="password"
+				name="password"
+				bind:value={$form.password}
+				{...$constraints.password}
+			/>
+		</label>
 		<button
-			class="flex 1 m-auto border-2 rounded"
+			class="btn variant-filled mt-2"
 			type="submit">Register</button
 		>
 	</form>

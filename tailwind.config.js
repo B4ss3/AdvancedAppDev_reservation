@@ -1,10 +1,7 @@
-// @ts-check
 import { join } from 'path';
-
-// 1. Import the Skeleton plugin
+import forms from '@tailwindcss/forms';
 import { skeleton } from '@skeletonlabs/tw-plugin';
 
-/** @type {import('tailwindcss').Config} */
 export default {
 	// 2. Opt for dark mode to be handled via the class method
 	darkMode: 'class',
@@ -20,7 +17,7 @@ export default {
 		extend: {},
 	},
 	plugins: [
-		// 4. Append the Skeleton plugin (after other plugins)
+		forms,
 		skeleton({
 			themes: { preset: ['vintage'] },
 		}),
