@@ -8,16 +8,17 @@
 
 <SuperDebug data={form} />
 
-<article>
+<article class=" max-w-md m-auto">
 	<header>
-		<h1>Register as new user</h1>
+		<h1 class="text-center">Register as new user</h1>
 	</header>
-	<form method="POST">
+	<form class="px-2 mb-2 border-2 flex flex-col" method="POST">
 		<label for="firstName">First name</label>
 		<input
 			type="text"
 			id="firstName"
 			name="firstName"
+            placeholder="First name"
 			bind:value={$form.firstName}
             {...constraints.firstName}
             />
@@ -29,6 +30,7 @@
 			type="text"
 			id="lastName"
 			name="lastName"
+            placeholder="Last name"
 			bind:value={$form.lastName}
             {...constraints.lastName}
 		/>
@@ -40,6 +42,7 @@
 			type="email"
 			id="email"
 			name="email"
+            placeholder="email"
 			bind:value={$form.email}
             {...constraints.email}
 		/>
@@ -51,6 +54,7 @@
 			type="text"
 			id="userName"
 			name="userName"
+            placeholder="username"
 			bind:value={$form.userName}
 		/>
 		{#if $errors.userName}
@@ -64,6 +68,6 @@
 			bind:value={$form.password}
             {...constraints.password}
 		/>
-		<button type="submit">Register</button>
+		<button class="flex 1 m-auto border-2 rounded" type="submit">Register</button>
 	</form>
 </article>

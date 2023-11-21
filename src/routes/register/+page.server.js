@@ -21,8 +21,6 @@ export const load = async ({ locals, event }) => {
 export const actions = {
 	default: async (event) => {
 		const form = await superValidate(event, newUserSchema);
-		console.log(form);
-
 		if (!form.valid) {
 			return fail(400, {
 				form,
@@ -30,5 +28,23 @@ export const actions = {
 		}
 
 		return { form };
+	},
+    
+	register: async ({ request, fetch }) => {
+		const formData = await request.formData();
+		const username = formData.get('username');
+		const password = formData.get('password');
+
+		const response = await fetch('http://localhost:8080/auth/register', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				username,
+				password,
+				roles: 'ROLE_USER',
+			}),
+		});
 	},
 };
