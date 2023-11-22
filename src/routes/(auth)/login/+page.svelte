@@ -8,7 +8,7 @@
 		resetForm: true,
 		onResult: async ({ result }) => {
 			if (result.type === 'success') {
-				await goto('/login');
+				await goto('/');
 			} else {
 				console.error(result.error);
 			}
