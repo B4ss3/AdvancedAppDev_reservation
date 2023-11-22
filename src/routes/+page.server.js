@@ -1,6 +1,6 @@
-export function load({ fetch }) {
-	//const data = { id:id, name: "asd", street: "asd" }; //fetch(`/api/apartments/${params.id}`)
-	const data = [];
+export const load = async ({ fetch }) => {
+	const respone = await fetch('http://localhost:8080/apartments');
+	const data = await respone.json();
 
 	return { apartments: data };
-}
+};
