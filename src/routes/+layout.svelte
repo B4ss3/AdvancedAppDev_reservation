@@ -8,6 +8,7 @@
 	<a href="/">Home</a>
 	<a href="/inbox">Inbox</a>
 	<a href="/my-applications">My applications</a>
+	<a href="/apartments/create">Add new apartment</a>
 	{#if data.user}
 		<a href="/logout">Logout</a>
 	{:else}

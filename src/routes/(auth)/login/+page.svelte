@@ -8,7 +8,7 @@
 		resetForm: true,
 		onResult: async ({ result }) => {
 			if (result.type === 'success') {
-				await goto('/');
+				await goto('/', { invalidateAll: true });
 			} else {
 				console.error(result.error);
 			}

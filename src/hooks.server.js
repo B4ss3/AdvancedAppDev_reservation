@@ -21,7 +21,7 @@ export async function handle({ event, resolve }) {
 	}
 }
 
-export async function handleFetch({ request, fetch }) {
+export async function handleFetch({ event, request, fetch }) {
 	// if process.env.API_ENDPOINT is defined, project is being run in docker container
 	// this means that using the normal localhost:8080 does not work
 	// therefore we change the host to the name of the backend service, saved in API_ENDPOINT
@@ -34,6 +34,16 @@ export async function handleFetch({ request, fetch }) {
 			request.url.replace('http://localhost:8080/', process.env.API_ENDPOINT),
 			request,
 		);
+	}
+
+	const jwtCookie = event.request.headers
+		.get('cookie')
+		?.split('; ')
+		.find((cookie) => cookie.startsWith('jwt='));
+
+	if (jwtCookie) {
+		const jwtToken = jwtCookie.split('=')[1];
+		request.headers.set('Authorization', `Bearer ${jwtToken}`);
 	}
 
 	return fetch(request);
