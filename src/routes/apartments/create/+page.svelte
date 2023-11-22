@@ -18,7 +18,7 @@
 
 <!-- <SuperDebug data={form} /> -->
 
-<article class="max-w-md m-auto">
+<article class="max-w-lg m-auto">
 	<header>
 		<h3 class="h3 text-center mt-4">Add new apartment</h3>
 	</header>
@@ -139,6 +139,17 @@
 				/>
 			</label>
 		</div>
+		<h4 class="h4 text-center mt-4">General</h4>
+		<label class="label">
+			<span>Description</span>
+			<textarea
+				class="input"
+				name="description"
+				cols="30"
+				rows="5"
+				bind:value={$form.description}
+			></textarea>
+		</label>
 
 		<button
 			class="btn variant-filled mt-2"

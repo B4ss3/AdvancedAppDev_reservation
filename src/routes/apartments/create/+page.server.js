@@ -6,6 +6,7 @@ const createApartmentSchema = z.object({
 	rentAmount: z.number(),
 	area: z.number(),
 	apartmentType: z.string().max(45),
+	description: z.string(),
 	streetName: z.string().max(45),
 	cityName: z.string().max(45),
 	postalCode: z.string().max(10),

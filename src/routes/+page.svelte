@@ -84,7 +84,11 @@
 
 					<article>
 						<p>
-							Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo, velit. Accusamus, laboriosam, dolores nostrum dignissimos fugit nihil inventore illo aspernatur sunt iure, cupiditate consectetur! Eveniet voluptas reprehenderit a corporis maiores!
+							{#if apartment.description}
+								{apartment.description}
+							{:else}
+								No description
+							{/if}
 						</p>
 					</article>
 				</div>
