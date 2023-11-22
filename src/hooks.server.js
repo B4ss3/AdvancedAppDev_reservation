@@ -47,6 +47,4 @@ export async function handleFetch({ event, request, fetch }) {
 	}
 
 	return fetch(request);
-
-	return fetch(request);
 }
