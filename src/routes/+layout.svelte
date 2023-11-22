@@ -1,30 +1,66 @@
 <script>
 	import '../app.postcss';
+	import { goto } from '$app/navigation';
+	import HumbleiconsHome from '~icons/Humbleicons/home';
+	import HumbleiconsChats from '~icons/Humbleicons/chats';
+	import HumbleiconsMail from '~icons/Humbleicons/mail';
 
 	export let data;
 </script>
 
-<nav>
-	<a href="/">Home</a>
-	<a href="/inbox">Inbox</a>
-	<a href="/my-applications">My applications</a>
-	<a href="/apartments/create">Add new apartment</a>
-	{#if data.user}
-		<a href="/logout">Logout</a>
-	{:else}
-		<a href="/login">Login</a>
-	{/if}
-</nav>
+<header>
+	<nav class="flex align-middle gap-1 p-2">
+		<button
+			type="button"
+			class="btn variant-filled"
+			on:click={async () => await goto('/')}
+		>
+			<span><HumbleiconsHome></HumbleiconsHome></span>
+			<span>Apartments</span>
+		</button>
+		<button
+			type="button"
+			class="btn variant-filled"
+			on:click={async () => await goto('/apartments/create')}
+		>
+			<span>Add new apartment</span>
+		</button>
+		<button
+			type="button"
+			class="btn variant-filled"
+			on:click={async () => await goto('/inbox')}
+		>
+			<span><HumbleiconsMail></HumbleiconsMail></span>
+			<span>Inbox</span>
+		</button>
+		<button
+			type="button"
+			class="btn variant-filled"
+			on:click={async () => await goto('/my-applications')}
+		>
+			<span><HumbleiconsMail></HumbleiconsMail></span>
+			<span>My Applications</span>
+		</button>
 
-{#if data.user}
-	<h1>Hi, {data.user.sub}</h1>
-{/if}
-
-<slot />
-
-<style>
-	h1 {
-		font-size: 24px;
-		font-weight: bold;
-	}
-</style>
+		{#if data.user}
+			<button
+				type="button"
+				class="btn variant-filled ml-auto"
+				on:click={async () => await goto('/logout')}
+			>
+				<span>Logout</span>
+			</button>
+		{:else}
+			<button
+				type="button"
+				class="btn variant-filled ml-auto"
+				on:click={async () => await goto('/login')}
+			>
+				<span>Login</span>
+			</button>
+		{/if}
+	</nav>
+</header>
+<main>
+	<slot />
+</main>
