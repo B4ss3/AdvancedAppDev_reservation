@@ -1,4 +1,6 @@
 <script>
+	import { APARTMENT_TYPES } from '$lib/constants';
+
 	export let data;
 	console.log(data);
 
@@ -25,13 +27,8 @@
 		return `${streetName} ${apartmentNumber}, ${postalCode}, ${cityName}`;
 	};
 
-	const typeMap = {
-		"ONE_ROOM_FLAT": "One room flat",
-		"TWO_ROOM_FLAT": "Two room flat",
-	};
-
 	const convertType = (rawType) => {
-		return typeMap[rawType] || undefined;
+		return APARTMENT_TYPES[rawType] || undefined;
 	};
 
 	const getRoomString = (apartment) => {
@@ -50,7 +47,7 @@
 		if (roomBathroomCount > 0) roomStrings.push(`${roomBathroomCount} kh`);
 		if (roomBalconyCount > 0) roomStrings.push(`${roomBalconyCount} p`);
 
-		return roomStrings.join(" + ")
+		return roomStrings.join(' + ');
 	};
 </script>
 
@@ -59,10 +56,11 @@
 {:then apartments}
 	<div class="grid grid-cols-4 gap-4">
 		{#each apartments as apartment}
-		{@const roomString = getRoomString(apartment) || null}
+			{@const roomString = getRoomString(apartment) || null}
 			<a
 				class="card .variant-glass-primary card-hover overflow-hidden"
-				href={"/apartments/" + apartment.apartmentId}			>
+				href={'/apartments/' + apartment.apartmentId}
+			>
 				<header>
 					<img
 						src={getRandomPicture()}
@@ -71,11 +69,9 @@
 					/>
 				</header>
 				<div class="p-4 space-y-4">
-					<h6
-						class="h6 block"
-					>
+					<h6 class="h6 block">
 						{constructAddress(apartment)}
-						<br>
+						<br />
 						<span>{apartment.area} m²</span>
 						{#if roomString}
 							<span>&nbsp;({roomString})</span>

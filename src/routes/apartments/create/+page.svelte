@@ -4,19 +4,22 @@
 	import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
 	export let data;
 
-	const { form, enhance } = superForm(data.form, {
+	import { APARTMENT_TYPES } from '$lib/constants';
+
+	const { form, enhance, constraints } = superForm(data.form, {
 		resetForm: true,
 		onResult: async ({ result }) => {
 			if (result.type === 'success') {
 				await goto('/', { invalidateAll: true });
-			} else {
-				console.error(result.error);
 			}
+		},
+		onError: async (event) => {
+			console.error(event);
 		},
 	});
 </script>
 
-<!-- <SuperDebug data={form} /> -->
+<SuperDebug data={form} />
 
 <article class="max-w-lg m-auto">
 	<header>
@@ -35,6 +38,7 @@
 				type="text"
 				name="streetName"
 				bind:value={$form.streetName}
+				{...$constraints.streetName}
 			/>
 		</label>
 
@@ -46,6 +50,7 @@
 					type="text"
 					name="cityName"
 					bind:value={$form.cityName}
+					{...$constraints.cityName}
 				/>
 			</label>
 			<label class="label">
@@ -55,6 +60,7 @@
 					type="text"
 					name="apartmentNumber"
 					bind:value={$form.apartmentNumber}
+					{...$constraints.apartmentNumber}
 				/>
 			</label>
 		</div>
@@ -65,6 +71,7 @@
 				type="text"
 				name="postalCode"
 				bind:value={$form.postalCode}
+				{...$constraints.postalCode}
 			/>
 		</label>
 
@@ -77,9 +84,11 @@
 					type="text"
 					name="apartmentType"
 					bind:value={$form.apartmentType}
+					{...$constraints.apartmentType}
 				>
-					<option value="ONE_ROOM_FLAT">One room flat</option>
-					<option value="TWO_ROOM_FLAT">Two room flat</option>
+					{#each Object.entries(APARTMENT_TYPES) as [key, value]}
+						<option value={key}>{value}</option>
+					{/each}
 				</select>
 			</label>
 			<label class="label">
@@ -89,6 +98,7 @@
 					type="number"
 					name="area"
 					bind:value={$form.area}
+					{...$constraints.area}
 				/>
 			</label>
 			<label class="label">
@@ -98,6 +108,7 @@
 					type="number"
 					name="rentAmount"
 					bind:value={$form.rentAmount}
+					{...$constraints.rentAmount}
 				/>
 			</label>
 		</div>
@@ -109,6 +120,7 @@
 					type="number"
 					name="roomNormalCount"
 					bind:value={$form.roomNormalCount}
+					{...$constraints.roomNormalCount}
 				/>
 			</label>
 			<label class="label">
@@ -118,6 +130,7 @@
 					type="number"
 					name="roomKitchenCount"
 					bind:value={$form.roomKitchenCount}
+					{...$constraints.roomKitchenCount}
 				/>
 			</label>
 			<label class="label">
@@ -127,6 +140,7 @@
 					type="number"
 					name="roomBalconyCount"
 					bind:value={$form.roomBalconyCount}
+					{...$constraints.roomBalconyCount}
 				/>
 			</label>
 			<label class="label">
@@ -136,6 +150,7 @@
 					type="number"
 					name="roomBathroomCount"
 					bind:value={$form.roomBathroomCount}
+					{...$constraints.roomBathroomCount}
 				/>
 			</label>
 		</div>
@@ -148,6 +163,7 @@
 				cols="30"
 				rows="5"
 				bind:value={$form.description}
+				{...$constraints.description}
 			></textarea>
 		</label>
 

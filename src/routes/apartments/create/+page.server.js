@@ -1,12 +1,13 @@
 import { fail, redirect } from '@sveltejs/kit';
 import { z } from 'zod';
 import { superValidate } from 'sveltekit-superforms/server';
+import { APARTMENT_TYPES } from '$lib/constants';
 
 const createApartmentSchema = z.object({
 	rentAmount: z.number(),
 	area: z.number(),
-	apartmentType: z.string().max(45),
-	description: z.string(),
+	apartmentType: z.enum(Object.keys(APARTMENT_TYPES)),
+	description: z.string().default(''),
 	streetName: z.string().max(45),
 	cityName: z.string().max(45),
 	postalCode: z.string().max(10),
@@ -43,7 +44,7 @@ export const actions = {
 				body: JSON.stringify({
 					rentAmount: form.data.rentAmount,
 					area: form.data.area,
-					type: form.data.apartmentType,
+					apartmentType: form.data.apartmentType,
 					streetName: form.data.streetName,
 					cityName: form.data.cityName,
 					postalCode: form.data.postalCode,
