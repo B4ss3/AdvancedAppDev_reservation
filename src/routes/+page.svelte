@@ -1,5 +1,6 @@
 <script>
 	import { APARTMENT_TYPES } from '$lib/constants';
+	import { goto } from '$app/navigation';
 
 	export let data;
 	console.log(data);
@@ -57,10 +58,7 @@
 	<div class="grid grid-cols-4 gap-4">
 		{#each apartments as apartment}
 			{@const roomString = getRoomString(apartment) || null}
-			<a
-				class="card .variant-glass-primary card-hover overflow-hidden"
-				href={'/apartments/' + apartment.apartmentId}
-			>
+			<div class="card .variant-glass-primary card-hover overflow-hidden">
 				<header>
 					<img
 						src={getRandomPicture()}
@@ -97,15 +95,18 @@
 						>
 							By {apartment.ownerId}
 						</h6>
-						<!-- <small>On {new Date().toLocaleDateString()}</small> -->
+						<h4 class="h4 ml-auto mr-2">{apartment.rentAmount} €/kk</h4>
+						<button
+							type="button"
+							class="btn variant-filled"
+							on:click={async () =>
+								await goto(`/apartments/${apartment.apartmentId}/apply`)}
+						>
+							<span>Rent</span>
+						</button>
 					</div>
 				</footer>
-			</a>
-			<!-- Rent: {apartment.rentAmount} €
-			Area: {} m2
-			Type: {apartment.type}
-
-			<!-- </a> -->
+			</div>
 		{/each}
 	</div>
 {/await}
