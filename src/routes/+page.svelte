@@ -96,7 +96,7 @@
 							By {apartment.owner.fullName}
 						</h6>
 						<h4 class="h4 ml-auto mr-2">{apartment.rentAmount} €/kk</h4>
-						{#if data.user.id === apartment.owner.userId}
+						{#if data.user && data.user.id === apartment.owner.userId}
 							<button
 								type="button"
 								class="btn variant-filled"
