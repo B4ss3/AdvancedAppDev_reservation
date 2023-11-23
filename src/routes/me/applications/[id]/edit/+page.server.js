@@ -1,11 +1,15 @@
-import { fail, redirect } from '@sveltejs/kit';
 import { superValidate } from 'sveltekit-superforms/server';
 import applicationSchema from '$lib/schemas/application';
 
-export const load = async ({ locals }) => {
+export const load = async ({ locals, fetch, params }) => {
 	if (!locals.user) throw redirect(307, '/login');
 
-	const form = await superValidate(applicationSchema);
+	// fetch application entry for the id
+	const response = await fetch(
+		`http://localhost:8080/applications/${params.id}`,
+	);
+	const data = await response.json();
+	const form = await superValidate(data, applicationSchema);
 	return { form };
 };
 
@@ -20,16 +24,19 @@ export const actions = {
 		}
 
 		try {
-			const response = await fetch('http://localhost:8080/applications', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
+			// params.id is application's id
+			const response = await fetch(
+				`http://localhost:8080/applications/${params.id}`,
+				{
+					method: 'PUT',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify({
+						message: form.data.message,
+					}),
 				},
-				body: JSON.stringify({
-					message: form.data.message,
-					apartmentId: params.id,
-				}),
-			});
+			);
 
 			if (!response.ok) {
 				throw new Error(`HTTP error! Status: ${response.status}`);

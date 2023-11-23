@@ -8,16 +8,14 @@
 		resetForm: true,
 		onResult: async ({ result }) => {
 			if (result.type === 'success') {
-				await goto('/', { invalidateAll: true });
+				await goto('/me/applications', { invalidateAll: true });
 			}
 		},
 		onError: async (event) => {
-			console.error(event);
+			console.error(event.result.error.message);
 		},
 	});
 </script>
-
-<SuperDebug data={form} />
 
 <article class="max-w-lg m-auto">
 	<header>

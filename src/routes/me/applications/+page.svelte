@@ -4,8 +4,17 @@
 	export let data;
 	console.log(data);
 
-	const { userSentApplications = [], applicationsForUserAppartments = [] } =
-		data.data;
+	let userSentApplications = [];
+	let applicationsForUserAppartments = [];
+
+	const applyLoad = (data) => {
+		if (data.userSentApplications)
+			userSentApplications = data.userSentApplications;
+		if (data.applicationsForUserAppartments)
+			applicationsForUserAppartments = data.applicationsForUserAppartments;
+	};
+	// trigger invalidation
+	$: applyLoad(data.data);
 </script>
 
 <section class="mt-5">
