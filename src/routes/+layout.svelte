@@ -36,10 +36,10 @@
 		<button
 			type="button"
 			class="btn variant-filled"
-			on:click={async () => await goto('/my-applications')}
+			on:click={async () => await goto('/me/applications')}
 		>
 			<span><HumbleiconsMail></HumbleiconsMail></span>
-			<span>My Applications</span>
+			<span>Applications</span>
 		</button>
 
 		{#if data.user}
