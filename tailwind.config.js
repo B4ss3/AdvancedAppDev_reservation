@@ -19,7 +19,18 @@ export default {
 	plugins: [
 		forms,
 		skeleton({
-			themes: { preset: ['vintage'] },
+			themes: {
+				preset: [
+					// Enable 'enhancements' per each registered theme:
+					{ name: 'skeleton', enhancements: true },
+					{ name: 'wintry', enhancements: false },
+					{ name: 'rocket', enhancements: false },
+					{ name: 'vintage', enhancements: false },
+					{ name: 'sahara', enhancements: false },
+					{ name: 'hamlindigo', enhancements: false },
+					{ name: 'gold-nouveau', enhancements: true },
+				],
+			},
 		}),
 	],
 };
