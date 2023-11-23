@@ -93,17 +93,28 @@
 							class="font-bold"
 							data-toc-ignore
 						>
-							By {apartment.ownerId}
+							By {apartment.owner.firstName}
 						</h6>
 						<h4 class="h4 ml-auto mr-2">{apartment.rentAmount} €/kk</h4>
-						<button
-							type="button"
-							class="btn variant-filled"
-							on:click={async () =>
-								await goto(`/apartments/${apartment.apartmentId}/apply`)}
-						>
-							<span>Rent</span>
-						</button>
+						{#if data.user.id === apartment.owner.userId}
+							<button
+								type="button"
+								class="btn variant-filled"
+								on:click={async () =>
+									await goto(`/apartments/${apartment.apartmentId}/update`)}
+							>
+								<span>Update</span>
+							</button>
+						{:else}
+							<button
+								type="button"
+								class="btn variant-filled"
+								on:click={async () =>
+									await goto(`/apartments/${apartment.apartmentId}/apply`)}
+							>
+								<span>Rent</span>
+							</button>
+						{/if}
 					</div>
 				</footer>
 			</div>
