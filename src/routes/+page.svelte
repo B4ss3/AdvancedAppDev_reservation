@@ -93,7 +93,7 @@
 							class="font-bold"
 							data-toc-ignore
 						>
-							By {apartment.owner.firstName + ' ' + apartment.owner.lastName}
+							By {apartment.owner.fullName}
 						</h6>
 						<h4 class="h4 ml-auto mr-2">{apartment.rentAmount} €/kk</h4>
 						{#if data.user.id === apartment.owner.userId}
