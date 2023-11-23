@@ -43,14 +43,14 @@
 		</button>
 
 		{#if data.user}
-		<p class="ml-60">
-			Hello {data.user.sub}
-		</p>
+			<p class="ml-60">
+				Hello {data.user.sub}
+			</p>
 			<button
-		type="button"
-		class="btn variant-filled ml-auto"
-		on:click={async () => await goto('/logout')}
-		>
+				type="button"
+				class="btn variant-filled ml-auto"
+				on:click={async () => await goto('/logout')}
+			>
 				<span>Logout</span>
 			</button>
 		{:else}
