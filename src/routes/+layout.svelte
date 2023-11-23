@@ -28,14 +28,6 @@
 		<button
 			type="button"
 			class="btn variant-filled"
-			on:click={async () => await goto('/inbox')}
-		>
-			<span><HumbleiconsMail></HumbleiconsMail></span>
-			<span>Inbox</span>
-		</button>
-		<button
-			type="button"
-			class="btn variant-filled"
 			on:click={async () => await goto('/me/applications')}
 		>
 			<span><HumbleiconsMail></HumbleiconsMail></span>
