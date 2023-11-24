@@ -5,13 +5,13 @@
 	console.log(data);
 
 	let userSentApplications = [];
-	let applicationsForUserAppartments = [];
+	let applicationsForUserApartments = [];
 
 	const applyLoad = (data) => {
 		if (data.userSentApplications)
 			userSentApplications = data.userSentApplications;
-		if (data.applicationsForUserAppartments)
-			applicationsForUserAppartments = data.applicationsForUserAppartments;
+		if (data.applicationsForUserApartments)
+			applicationsForUserApartments = data.applicationsForUserApartments;
 	};
 	// trigger invalidation
 	$: applyLoad(data.data);
@@ -31,7 +31,7 @@
 <section class="mt-5">
 	<h3 class="h3 font-bold">Applications for apartments</h3>
 	<Accordion>
-		{#each applicationsForUserAppartments as application}
+		{#each applicationsForUserApartments as application}
 			<ApplicationListEntry {application}></ApplicationListEntry>
 		{:else}
 			No applications
