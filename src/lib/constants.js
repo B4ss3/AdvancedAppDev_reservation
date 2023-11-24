@@ -1,7 +1,14 @@
+/* ENUMS */
 export const APARTMENT_TYPES = {
 	ONE_ROOM_FLAT: 'One room flat',
 	TWO_ROOM_FLAT: 'Two room flat',
 	THREE_ROOM_FLAT: 'Three room flat',
+};
+
+export const APPLICATION_STATUS = {
+	PENDING: 'Pending',
+	ACCEPTED: 'Accepted',
+	DECLINED: 'Declined',
 };
 
 export const constructAddress = (apartment) => {

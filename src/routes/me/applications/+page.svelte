@@ -32,7 +32,10 @@
 	<h3 class="h3 font-bold">Applications for apartments</h3>
 	<Accordion>
 		{#each applicationsForUserApartments as application}
-			<ApplicationListEntry {application}></ApplicationListEntry>
+			<ApplicationListEntry
+				{application}
+				owned={true}
+			></ApplicationListEntry>
 		{:else}
 			No applications
 		{/each}

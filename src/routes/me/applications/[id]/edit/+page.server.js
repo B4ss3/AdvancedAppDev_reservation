@@ -40,11 +40,11 @@ export const actions = {
 			);
 
 			if (response.status === 401) {
-				console.log("Unauthorized attempt to edit application");
+				console.log('Unauthorized attempt to edit application');
 				return fail(401, {
 					form,
-					message: "Cannot edit the application because user is not the author"
-				})
+					message: 'Cannot edit the application because user is not the author',
+				});
 			}
 
 			if (!response.ok) {
