@@ -36,16 +36,54 @@
 		}
 	};
 
-	const handleAccept = async () => {};
+	const handleAccept = async () => {
+		const response = await fetch(
+			`/api/applications/${application.applicationId}?status=accept`,
+			{
+				method: 'POST',
+			},
+		);
+		const { message, success } = await response.json();
+		if (success) {
+			console.log(message);
+			invalidate('load:applications');
+		}
+	};
 
-	const handleDecline = async () => {};
+	const handleDecline = async () => {
+		const response = await fetch(
+			`/api/applications/${application.applicationId}?status=decline`,
+			{
+				method: 'POST',
+			},
+		);
+		const { message, success } = await response.json();
+		if (success) {
+			console.log(message);
+			invalidate('load:applications');
+		}
+	};
 </script>
 
 <AccordionItem>
 	<svelte:fragment slot="lead"><HumbleiconsHome /></svelte:fragment>
 	<svelte:fragment slot="summary">
-		<h5 class="h5">{fullAddress}</h5>
-		Status: {APPLICATION_STATUS[application.status]}
+		<h5 class="h5">
+			{#if application.status === 'ACCEPTED'}
+				<span class="badge variant-filled-success"
+					>{APPLICATION_STATUS[application.status]}</span
+				>
+			{:else if application.status === 'DECLINED'}
+				<span class="badge variant-filled-error"
+					>{APPLICATION_STATUS[application.status]}</span
+				>
+			{:else}
+				<span class="badge variant-filled"
+					>{APPLICATION_STATUS[application.status]}</span
+				>
+			{/if}
+			{fullAddress}
+		</h5>
 	</svelte:fragment>
 	<svelte:fragment slot="content">
 		{application.message}
