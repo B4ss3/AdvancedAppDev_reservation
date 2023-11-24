@@ -101,7 +101,7 @@
 								on:click={async () =>
 									await goto(`/apartments/${apartment.apartmentId}/apply`)}
 							>
-								<span>Rent</span>
+								<span>Apply</span>
 							</button>
 						{/if}
 					</div>
