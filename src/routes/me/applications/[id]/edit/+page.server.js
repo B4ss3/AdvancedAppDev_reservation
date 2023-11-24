@@ -1,3 +1,4 @@
+import { fail } from '@sveltejs/kit';
 import { superValidate } from 'sveltekit-superforms/server';
 import applicationSchema from '$lib/schemas/application';
 
@@ -37,6 +38,14 @@ export const actions = {
 					}),
 				},
 			);
+
+			if (response.status === 401) {
+				console.log("Unauthorized attempt to edit application");
+				return fail(401, {
+					form,
+					message: "Cannot edit the application because user is not the author"
+				})
+			}
 
 			if (!response.ok) {
 				throw new Error(`HTTP error! Status: ${response.status}`);

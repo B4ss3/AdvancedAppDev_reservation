@@ -9,6 +9,8 @@
 		onResult: async ({ result }) => {
 			if (result.type === 'success') {
 				await goto('/me/applications', { invalidateAll: true });
+			} else {
+				console.error(result.data.message);
 			}
 		},
 		onError: async (event) => {
