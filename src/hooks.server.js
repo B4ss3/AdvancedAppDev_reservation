@@ -5,6 +5,9 @@ export async function handle({ event, resolve }) {
 
 	let user = null;
 	try {
+		if(!jwt) {
+			throw "no JWT cookie"
+		}
 		if (jwt) {
 			// if jwt token has been saved into cookies, attempt extracting user information from it
 			// const _secret = new TextEncoder().encode(secret);
@@ -15,6 +18,7 @@ export async function handle({ event, resolve }) {
 	} catch (err) {
 		console.error(err);
 		user = null;
+		event.cookies.set("jwt","")
 	} finally {
 		event.locals.user = user;
 		return resolve(event);
