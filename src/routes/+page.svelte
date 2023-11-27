@@ -3,7 +3,6 @@
 	import { goto } from '$app/navigation';
 
 	export let data;
-	console.log(data);
 
 	const pictureLinks = [
 		'https://d2ue5ppt0wsjaa.cloudfront.net/640x427,fit/vuokraovimedia/images/162/823/712/412/162823712412664_original.jpg',

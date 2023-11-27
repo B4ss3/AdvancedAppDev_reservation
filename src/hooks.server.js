@@ -5,16 +5,15 @@ export async function handle({ event, resolve }) {
 
 	let user = null;
 	try {
-		if (!jwt) throw 'no JWT cookie';
-		// if jwt token has been saved into cookies, attempt extracting user information from it
-		// const _secret = new TextEncoder().encode(secret);
-		const decoded = await decodeJwt(jwt);
-		// console.log({decoded});
-		user = decoded;
+		if (jwt) {
+			// if jwt token has been saved into cookies, attempt extracting user information from it
+			// const _secret = new TextEncoder().encode(secret);
+			const decoded = await decodeJwt(jwt);
+			user = decoded;
+		}
 	} catch (err) {
 		console.error(err);
 		user = null;
-		event.cookies.set('jwt', '');
 	} finally {
 		event.locals.user = user;
 		return resolve(event);
