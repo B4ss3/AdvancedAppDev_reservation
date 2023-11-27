@@ -45,6 +45,7 @@ export const actions = {
 					rentAmount: form.data.rentAmount,
 					area: form.data.area,
 					apartmentType: form.data.apartmentType,
+					description: form.data.description,
 					streetName: form.data.streetName,
 					cityName: form.data.cityName,
 					postalCode: form.data.postalCode,

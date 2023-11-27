@@ -1,5 +1,5 @@
 <script>
-	import { APARTMENT_TYPES } from '$lib/constants';
+	import { APARTMENT_TYPES, constructAddress } from '$lib/constants';
 	import { goto } from '$app/navigation';
 
 	export let data;
@@ -15,17 +15,6 @@
 	const getRandomPicture = () => {
 		const r = Math.floor(Math.random() * pictureLinks.length);
 		return pictureLinks[r];
-	};
-
-	const constructAddress = (apartment) => {
-		let { cityName, postalCode, streetName, apartmentNumber } = apartment;
-		// cannot default in deconstruct if value is null
-		if (cityName === null) cityName = 'Turku';
-		if (postalCode === null) postalCode = '20540';
-		if (streetName === null) streetName = 'Jaanintie 34';
-		if (apartmentNumber === null) apartmentNumber = 'D 72';
-
-		return `${streetName} ${apartmentNumber}, ${postalCode}, ${cityName}`;
 	};
 
 	const convertType = (rawType) => {
@@ -93,10 +82,10 @@
 							class="font-bold"
 							data-toc-ignore
 						>
-							By {apartment.owner.firstName}
+							By {apartment.owner.fullName}
 						</h6>
 						<h4 class="h4 ml-auto mr-2">{apartment.rentAmount} €/kk</h4>
-						{#if data.user.id === apartment.owner.userId}
+						{#if data.user && data.user.id === apartment.owner.userId}
 							<button
 								type="button"
 								class="btn variant-filled"
@@ -112,7 +101,7 @@
 								on:click={async () =>
 									await goto(`/apartments/${apartment.apartmentId}/apply`)}
 							>
-								<span>Rent</span>
+								<span>Apply</span>
 							</button>
 						{/if}
 					</div>
