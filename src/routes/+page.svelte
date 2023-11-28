@@ -43,10 +43,10 @@
 {#await data.apartments}
 	<p>Waiting...</p>
 {:then apartments}
-	<div class="grid grid-cols-4 gap-4">
+	<div class="grid grid-cols-4 gap-4 p-2">
 		{#each apartments as apartment}
 			{@const roomString = getRoomString(apartment) || null}
-			<div class="card .variant-glass-primary card-hover overflow-hidden">
+			<div class="card variant-glass-primary card-hover overflow-hidden">
 				<header>
 					<img
 						src={getRandomPicture()}
