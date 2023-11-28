@@ -7,7 +7,7 @@
 </script>
 
 <header>
-	<nav class="flex align-middle gap-1 p-2">
+	<nav class="flex gap-1 p-2">
 		<button
 			type="button"
 			class="btn variant-filled"
@@ -32,26 +32,28 @@
 			<span>Applications</span>
 		</button>
 
-		{#if data.user}
-			<p class="ml-60">
-				Hello {data.user.sub}
-			</p>
-			<button
-				type="button"
-				class="btn variant-filled ml-auto"
-				on:click={async () => await goto('/logout')}
-			>
-				<span>Logout</span>
-			</button>
-		{:else}
-			<button
-				type="button"
-				class="btn variant-filled ml-auto"
-				on:click={async () => await goto('/login')}
-			>
-				<span>Login</span>
-			</button>
-		{/if}
+		<div class="flex ml-auto">
+			{#if data.user}
+				<p class="p-2">
+					Hello {data.user.sub}
+				</p>
+				<button
+					type="button"
+					class="btn variant-filled"
+					on:click={async () => await goto('/logout')}
+				>
+					<span>Logout</span>
+				</button>
+			{:else}
+				<button
+					type="button"
+					class="btn variant-filled"
+					on:click={async () => await goto('/login')}
+				>
+					<span>Login</span>
+				</button>
+			{/if}
+		</div>
 	</nav>
 </header>
 <main>
