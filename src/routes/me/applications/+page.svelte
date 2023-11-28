@@ -7,6 +7,8 @@
 	let applicationsForUserApartments = [];
 
 	const applyLoad = (data) => {
+		if (!data) return;
+
 		if (data.userSentApplications)
 			userSentApplications = data.userSentApplications;
 		if (data.applicationsForUserApartments)
