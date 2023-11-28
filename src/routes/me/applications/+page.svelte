@@ -2,7 +2,6 @@
 	import { Accordion } from '@skeletonlabs/skeleton';
 	import ApplicationListEntry from '$lib/components/ApplicationListEntry.svelte';
 	export let data;
-	console.log(data);
 
 	let userSentApplications = [];
 	let applicationsForUserApartments = [];

@@ -1,6 +1,6 @@
 <script>
 	import { AccordionItem } from '@skeletonlabs/skeleton';
-	import HumbleiconsHome from '~icons/humbleicons/home';
+	import { HomeOutline } from 'flowbite-svelte-icons';
 	import { goto } from '$app/navigation';
 	import { APPLICATION_STATUS, constructAddress } from '$lib/constants';
 	import { invalidate } from '$app/navigation';
@@ -66,7 +66,7 @@
 </script>
 
 <AccordionItem>
-	<svelte:fragment slot="lead"><HumbleiconsHome /></svelte:fragment>
+	<svelte:fragment slot="lead"><HomeOutline /></svelte:fragment>
 	<svelte:fragment slot="summary">
 		<h5 class="h5">
 			{#if application.status === 'ACCEPTED'}

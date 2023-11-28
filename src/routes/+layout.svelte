@@ -1,9 +1,7 @@
 <script>
 	import '../app.postcss';
 	import { goto } from '$app/navigation';
-	import HumbleiconsHome from '~icons/Humbleicons/home';
-	import HumbleiconsChats from '~icons/Humbleicons/chats';
-	import HumbleiconsMail from '~icons/Humbleicons/mail';
+	import { HomeOutline, MessagesOutline } from 'flowbite-svelte-icons';
 
 	export let data;
 </script>
@@ -15,7 +13,7 @@
 			class="btn variant-filled"
 			on:click={async () => await goto('/')}
 		>
-			<span><HumbleiconsHome></HumbleiconsHome></span>
+			<span><HomeOutline /></span>
 			<span>Apartments</span>
 		</button>
 		<button
@@ -30,7 +28,7 @@
 			class="btn variant-filled"
 			on:click={async () => await goto('/me/applications')}
 		>
-			<span><HumbleiconsMail></HumbleiconsMail></span>
+			<span><MessagesOutline /></span>
 			<span>Applications</span>
 		</button>
 

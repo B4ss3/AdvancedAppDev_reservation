@@ -6,6 +6,7 @@ export default {
 	// 2. Opt for dark mode to be handled via the class method
 	darkMode: 'class',
 	content: [
+		'./node_modules/flowbite-svelte-icons/**/*.{html,js,svelte,ts}',
 		'./src/**/*.{html,js,svelte,ts}',
 		// 3. Append the path to the Skeleton package
 		join(
