@@ -12,7 +12,7 @@
 					<img
 						src={getRandomPicture()}
 						class="bg-black/50 w-full aspect-[21/9]"
-						alt={data.apartments.address}
+						alt={apartment.address}
 					/>
 				</header>
 				<div class="p-4 space-y-4">

@@ -47,6 +47,26 @@
 					alt={data.apartments.data.address}
 				/>
 			</header>
+            <div class="p-4 space-y-4">
+				<h6 class="h6 block">
+					{constructAddress(apartment)}
+					<br />
+					<span>{apartment.area} m²</span>
+					{#if roomString}
+						<span>&nbsp;({roomString})</span>
+					{/if}
+				</h6>
+				<article>
+					<p>
+						{#if apartment.description}
+							{apartment.description}
+						{:else}
+							No description
+						{/if}
+					</p>
+				</article>
+			</div>
+
             <footer class="p-4 flex justify-start items-center space-x-4">
                 <div class="flex-auto flex justify-between items-center">
                     <h4 class="h4 ml-auto mr-2">{apartment.rentAmount} €/kk</h4>
