@@ -41,7 +41,11 @@
 	};
 </script>
 
-<SuperDebug data={form} />
+<!-- <SuperDebug data={form} /> -->
+
+<svelte:head>
+	<title>Create apartment</title>
+</svelte:head>
 
 <article class="max-w-lg m-auto">
 	<header>
@@ -118,6 +122,7 @@
 					class="input"
 					type="number"
 					name="area"
+					step="0.1"
 					bind:value={$form.area}
 					{...$constraints.area}
 				/>
@@ -128,6 +133,7 @@
 					class="input"
 					type="number"
 					name="rentAmount"
+					step="0.1"
 					bind:value={$form.rentAmount}
 					{...$constraints.rentAmount}
 				/>
