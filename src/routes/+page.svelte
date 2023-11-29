@@ -8,7 +8,7 @@
 	export let data;
 </script>
 
-<div class="grid grid-cols-4 gap-4 p-2">
+<div class="grid grid-cols-4 gap-4">
 	{#each data.apartments as apartment}
 		{@const roomString = getRoomString(apartment) || null}
 		<div class="card variant-glass-primary card-hover overflow-hidden">
