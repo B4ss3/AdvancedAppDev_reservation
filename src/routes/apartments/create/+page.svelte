@@ -96,7 +96,7 @@
 				</select>
 			</label>
 			<label class="label">
-				<span>Area in spuares</span>
+				<span>Area in squares</span>
 				<input
 					class="input"
 					type="number"
