@@ -1,4 +1,8 @@
-export const load = async ({ fetch }) => {
+import { redirect } from '@sveltejs/kit';
+
+export const load = async ({ fetch, locals }) => {
+	if (!locals.user) throw redirect(307, '/login');
+
 	const apartmentDataResponse = await fetch(
 		'http://localhost:8080/users/me/apartments',
 	);
