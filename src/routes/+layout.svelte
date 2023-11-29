@@ -1,8 +1,13 @@
 <script>
 	import '../app.postcss';
 	import { goto } from '$app/navigation';
-	import { HomeOutline, MessagesOutline } from 'flowbite-svelte-icons';
-
+	import {
+		HomeOutline,
+		MessagesOutline,
+		ArrowLeftToBracketOutline,
+		EuroOutline,
+		PlusOutline,
+	} from 'flowbite-svelte-icons';
 	export let data;
 </script>
 
@@ -21,6 +26,7 @@
 			class="btn variant-filled"
 			on:click={async () => await goto('/apartments/create')}
 		>
+			<span><PlusOutline /></span>
 			<span>Add new apartment</span>
 		</button>
 		<button
@@ -30,6 +36,14 @@
 		>
 			<span><MessagesOutline /></span>
 			<span>Applications</span>
+		</button>
+		<button
+			type="button"
+			class="btn variant-filled"
+			on:click={async () => await goto('/me/apartments')}
+		>
+			<span><EuroOutline /></span>
+			<span>My apartments</span>
 		</button>
 
 		<div class="flex ml-auto">
@@ -42,6 +56,7 @@
 					class="btn variant-filled"
 					on:click={async () => await goto('/logout')}
 				>
+					<span><ArrowLeftToBracketOutline /></span>
 					<span>Logout</span>
 				</button>
 			{:else}
