@@ -18,6 +18,10 @@
 	$: applyLoad(data.data);
 </script>
 
+<svelte:head>
+    <title>My Applications</title> 
+</svelte:head>
+
 <section class="mt-5">
 	<h3 class="h3 font-bold">Sent applications</h3>
 	<Accordion>

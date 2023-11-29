@@ -17,7 +17,11 @@
 	});
 </script>
 
-<SuperDebug data={form} />
+<!-- <SuperDebug data={form} /> -->
+
+<svelte:head>
+    <title>Apply to apartment</title>
+</svelte:head>
 
 <article class="max-w-lg m-auto">
 	<header>
@@ -29,17 +33,14 @@
 		use:enhance
 	>
 		<label class="label">
-			<span>Application message </span>
-			<p>
-				Tell about yourself what ever you want inform if have animals of any
-				sort and other lies you want to tell
-			</p>
+			<span>Application message</span>
 			<textarea
 				type="text"
 				class="input"
 				name="message"
 				cols="30"
 				rows="5"
+				placeholder="Introduce yourself, tell whether you smoke or own pets, etc."
 				bind:value={$form.message}
 				{...$constraints.message}
 			></textarea>

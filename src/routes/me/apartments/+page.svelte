@@ -19,6 +19,10 @@
 	});
 </script>
 
+<svelte:head>
+    <title>My Apartments</title> 
+</svelte:head>
+
 <section class="mt-5">
 	<h3 class="h3">You are a landlord of:</h3>
 	<div class="grid grid-cols-4 gap-4">

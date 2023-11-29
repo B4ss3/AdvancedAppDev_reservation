@@ -19,7 +19,11 @@
 	});
 </script>
 
-<SuperDebug data={form} />
+<!-- <SuperDebug data={form} /> -->
+
+<svelte:head>
+    <title>Create apartment</title>
+</svelte:head>
 
 <article class="max-w-lg m-auto">
 	<header>

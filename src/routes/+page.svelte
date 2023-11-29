@@ -8,6 +8,10 @@
 	export let data;
 </script>
 
+<svelte:head>
+    <title>All apartments</title>
+</svelte:head>
+
 <div class="grid grid-cols-4 gap-4">
 	{#each data.apartments as apartment}
 		{@const roomString = getRoomString(apartment) || null}
