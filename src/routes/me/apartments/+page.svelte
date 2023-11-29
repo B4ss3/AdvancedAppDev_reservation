@@ -64,9 +64,9 @@
 								type="button"
 								class="btn variant-filled"
 								on:click={async () =>
-									await goto(`/apartments/${apartment.apartmentId}/update`)}
+									await goto(`/apartments/${apartment.apartmentId}/edit`)}
 							>
-								<span>Update</span>
+								<span>Edit</span>
 							</button>
 						{/if}
 					</div>
