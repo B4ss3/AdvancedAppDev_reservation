@@ -20,7 +20,7 @@
 </script>
 
 <svelte:head>
-    <title>My Apartments</title> 
+	<title>My Apartments</title>
 </svelte:head>
 
 <section class="mt-5">

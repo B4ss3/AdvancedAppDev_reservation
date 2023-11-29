@@ -9,7 +9,7 @@
 </script>
 
 <svelte:head>
-    <title>All apartments</title>
+	<title>All apartments</title>
 </svelte:head>
 
 <div class="grid grid-cols-4 gap-4">
