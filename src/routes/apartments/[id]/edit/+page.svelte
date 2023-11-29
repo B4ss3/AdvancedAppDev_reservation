@@ -20,24 +20,25 @@
 		},
 	});
 
-	const deleteApartment = async () => {
-		const confirmDelete = confirm(
-			'Are you sure you want to delete this apartment?',
-		);
-
-		if (confirmDelete) {
-			try {
-				const response = await fetch(`/api/apartments/${data.apartmentId}`, {
-					method: 'DELETE',
-				});
-				const result = await response.json();
-
-				await goto('/', { invalidateAll: true });
-			} catch (error) {
-				console.error('Error deleting apartment:', error);
-			}
-		}
-	};
+	// TODO: DELETE
+	// const deleteApartment = async () => {
+	// 	const confirmDelete = confirm(
+	// 		'Are you sure you want to delete this apartment?',
+	// 	);
+	//
+	// 	if (confirmDelete) {
+	// 		try {
+	// 			const response = await fetch(`/api/apartments/${data.apartmentId}`, {
+	// 				method: 'DELETE',
+	// 			});
+	// 			const result = await response.json();
+	//
+	// 			await goto('/', { invalidateAll: true });
+	// 		} catch (error) {
+	// 			console.error('Error deleting apartment:', error);
+	// 		}
+	// 	}
+	// };
 </script>
 
 <SuperDebug data={form} />
@@ -84,7 +85,6 @@
 				/>
 			</label>
 		</div>
-
 		<label class="label">
 			<span>Postal code</span>
 			<input
@@ -97,7 +97,6 @@
 		</label>
 
 		<h4 class="h4 text-center mt-4">Apartment details</h4>
-
 		<div class="flex flex-row gap-3">
 			<label class="label">
 				<span>Apartment type</span>
@@ -113,8 +112,6 @@
 					{/each}
 				</select>
 			</label>
-		</div>
-		<div class="flex flex-row gap-3">
 			<label class="label">
 				<span>Area in squares</span>
 				<input
@@ -136,7 +133,6 @@
 				/>
 			</label>
 		</div>
-
 		<div class="flex flex-row gap-3">
 			<label class="label">
 				<span>General rooms</span>
@@ -179,9 +175,7 @@
 				/>
 			</label>
 		</div>
-
 		<h4 class="h4 text-center mt-4">General</h4>
-
 		<label class="label">
 			<span>Description</span>
 			<textarea
@@ -196,11 +190,11 @@
 
 		<button
 			class="btn variant-filled mt-2"
-			type="submit">Update</button
-		>
-		<button
-			class="btn variant-filled mt-2"
-			on:click={deleteApartment}>Delete</button
+			type="submit">Submit</button
 		>
 	</form>
+	<!-- <button
+	class="btn variant-filled mt-2"
+	on:click={deleteApartment}>Delete</button
+	> -->
 </article>
