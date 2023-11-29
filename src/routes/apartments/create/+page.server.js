@@ -34,7 +34,7 @@ export const actions = {
 					streetName: form.data.streetName,
 					cityName: form.data.cityName,
 					postalCode: form.data.postalCode,
-					apartmentNmber: form.data.apartmentNmber,
+					apartmentNumber: form.data.apartmentNumber,
 					roomNormalCount: form.data.roomNormalCount,
 					roomKitchenCount: form.data.roomKitchenCount,
 					roomBalconyCount: form.data.roomBalconyCount,
