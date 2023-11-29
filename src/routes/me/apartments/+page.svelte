@@ -20,7 +20,7 @@
 </script>
 
 <svelte:head>
-    <title>My Apartments</title> 
+	<title>My Apartments</title>
 </svelte:head>
 
 <section class="mt-5">
@@ -64,9 +64,9 @@
 								type="button"
 								class="btn variant-filled"
 								on:click={async () =>
-									await goto(`/apartments/${apartment.apartmentId}/update`)}
+									await goto(`/apartments/${apartment.apartmentId}/edit`)}
 							>
-								<span>Update</span>
+								<span>Edit</span>
 							</button>
 						{/if}
 					</div>

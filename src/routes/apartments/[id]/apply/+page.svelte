@@ -20,7 +20,7 @@
 <!-- <SuperDebug data={form} /> -->
 
 <svelte:head>
-    <title>Apply to apartment</title>
+	<title>Apply to apartment</title>
 </svelte:head>
 
 <article class="max-w-lg m-auto">

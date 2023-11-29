@@ -9,7 +9,7 @@
 </script>
 
 <svelte:head>
-    <title>All apartments</title>
+	<title>All apartments</title>
 </svelte:head>
 
 <div class="grid grid-cols-4 gap-4">
@@ -57,9 +57,9 @@
 							type="button"
 							class="btn variant-filled"
 							on:click={async () =>
-								await goto(`/apartments/${apartment.apartmentId}/update`)}
+								await goto(`/apartments/${apartment.apartmentId}/edit`)}
 						>
-							<span>Update</span>
+							<span>Edit</span>
 						</button>
 					{:else}
 						<button

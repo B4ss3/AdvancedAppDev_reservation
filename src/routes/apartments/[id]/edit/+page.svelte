@@ -1,22 +1,44 @@
 <script>
+	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
 	import { superForm } from 'sveltekit-superforms/client';
 	import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
-	export let data;
-
 	import { APARTMENT_TYPES } from '$lib/constants';
+
+	export let data;
 
 	const { form, enhance, constraints } = superForm(data.form, {
 		resetForm: true,
 		onResult: async ({ result }) => {
 			if (result.type === 'success') {
 				await goto('/', { invalidateAll: true });
+			} else {
+				console.error(result.data.message);
 			}
 		},
 		onError: async (event) => {
-			console.error(event);
+			console.error(event.result.error.message);
 		},
 	});
+
+	const deleteApartment = async () => {
+		const confirmDelete = confirm(
+			'Are you sure you want to delete this apartment?',
+		);
+
+		if (confirmDelete) {
+			try {
+				const response = await fetch(`/api/apartments/${$page.params.id}`, {
+					method: 'DELETE',
+				});
+				const result = await response.json();
+
+				await goto('/', { invalidateAll: true });
+			} catch (error) {
+				console.error('Error deleting apartment:', error);
+			}
+		}
+	};
 </script>
 
 <!-- <SuperDebug data={form} /> -->
@@ -27,9 +49,8 @@
 
 <article class="max-w-lg m-auto">
 	<header>
-		<h3 class="h3 text-center mt-4">Add new apartment</h3>
+		<h3 class="h3 text-center mt-4">Edit House Listing</h3>
 	</header>
-	<h4 class="h4 text-center">Address</h4>
 	<form
 		class="px-2 mb-2 flex flex-col"
 		method="POST"
@@ -178,4 +199,8 @@
 			type="submit">Submit</button
 		>
 	</form>
+	<button
+		class="btn variant-filled mt-2"
+		on:click={deleteApartment}>Delete</button
+	>
 </article>

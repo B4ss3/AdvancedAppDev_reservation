@@ -1,14 +1,15 @@
 /* ENUMS */
-
 export const APARTMENT_TYPES = {
 	ONE_ROOM_FLAT: 'One room flat',
 	TWO_ROOM_FLAT: 'Two room flat',
 	THREE_ROOM_FLAT: 'Three room flat',
 };
 
-/* const convertType = (rawType) => {
-		return APARTMENT_TYPES[rawType] || undefined;
-}; */
+export const APPLICATION_STATUS = {
+	PENDING: 'Pending',
+	ACCEPTED: 'Accepted',
+	DECLINED: 'Declined',
+};
 
 const pictureLinks = [
 	'https://d2ue5ppt0wsjaa.cloudfront.net/640x427,fit/vuokraovimedia/images/162/823/712/412/162823712412664_original.jpg',
@@ -20,12 +21,6 @@ const pictureLinks = [
 export const getRandomPicture = () => {
 	const r = Math.floor(Math.random() * pictureLinks.length);
 	return pictureLinks[r];
-};
-
-export const APPLICATION_STATUS = {
-	PENDING: 'Pending',
-	ACCEPTED: 'Accepted',
-	DECLINED: 'Declined',
 };
 
 export const getRoomString = (apartment) => {

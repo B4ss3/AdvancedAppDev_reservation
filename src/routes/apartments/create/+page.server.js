@@ -1,33 +1,18 @@
 import { fail, redirect } from '@sveltejs/kit';
 import { z } from 'zod';
 import { superValidate } from 'sveltekit-superforms/server';
-import { APARTMENT_TYPES } from '$lib/constants';
-
-const createApartmentSchema = z.object({
-	rentAmount: z.number(),
-	area: z.number(),
-	apartmentType: z.enum(Object.keys(APARTMENT_TYPES)),
-	description: z.string().default(''),
-	streetName: z.string().max(45),
-	cityName: z.string().max(45),
-	postalCode: z.string().max(10),
-	apartmentNumber: z.string().max(10),
-	roomNormalCount: z.number().int().max(10),
-	roomKitchenCount: z.number().int().max(10),
-	roomBalconyCount: z.number().int().max(10),
-	roomBathroomCount: z.number().int().max(10),
-});
+import apartmentSchema from '$lib/schemas/apartment';
 
 export const load = async ({ locals }) => {
 	if (!locals.user) throw redirect(307, '/login');
 
-	const form = await superValidate(createApartmentSchema);
+	const form = await superValidate(apartmentSchema);
 	return { form };
 };
 
 export const actions = {
 	default: async ({ request, fetch }) => {
-		const form = await superValidate(request, createApartmentSchema);
+		const form = await superValidate(request, apartmentSchema);
 
 		if (!form.valid) {
 			return fail(400, {
@@ -49,7 +34,7 @@ export const actions = {
 					streetName: form.data.streetName,
 					cityName: form.data.cityName,
 					postalCode: form.data.postalCode,
-					apartmentNmber: form.data.apartmentNmber,
+					apartmentNumber: form.data.apartmentNumber,
 					roomNormalCount: form.data.roomNormalCount,
 					roomKitchenCount: form.data.roomKitchenCount,
 					roomBalconyCount: form.data.roomBalconyCount,

@@ -19,7 +19,7 @@
 </script>
 
 <svelte:head>
-    <title>My Applications</title> 
+	<title>My Applications</title>
 </svelte:head>
 
 <section class="mt-5">
